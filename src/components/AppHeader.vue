@@ -4,7 +4,6 @@
       <a href="/" class="active item">
         Image Storage
       </a>
-
       <div class="right menu">
         <a class="ui item">
           Login
