@@ -1,8 +1,9 @@
 import imgur from '../../api/imgur';
+import {router} from '../../main';
 
 export default {
   state: {
-    token: null,
+    token: window.localStorage.getItem('token'),
   },
   getters: {
     token: state => state.token,
@@ -22,9 +23,13 @@ export default {
       imgur.login();
     },
     finalizeLogin({commit}, link) {
-      commit('setToken', link.substring(30, 70));
+      var token = link.substring(30, 70);
+      window.localStorage.setItem('token', token);
+      router.push('/');
+      commit('setToken', token);
     },
     logout({commit}) {
+      window.localStorage.removeItem('token');
       commit('setToken', null);
     }
   }

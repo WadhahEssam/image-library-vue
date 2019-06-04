@@ -1,15 +1,15 @@
 <template>
   <div>
     <div class="ui secondary pointing menu">
-      <a href="/" class="active item">
-        Image Storage
-      </a>
+      <router-link to="/" class="item">
+        Image Gallery
+      </router-link>
       <div class="right menu">
         <div v-if="isLoggedIn" class="inline">
-          <router-link to="/gallery"  class="ui item">
+          <router-link to="/" class="ui item" v-bind:class="{ active : galleryIsActive }">
             Gallery
           </router-link>
-          <router-link to="/upload" class="ui item">
+          <router-link to="/upload" class="ui item" v-bind:class="{ active : uploadIsActive }">
             Upload
           </router-link>
           <a @click="logout" class="ui item reddish">
@@ -30,7 +30,13 @@
   export default {
     name: 'AppHeader',    
     computed: {
-      ...mapGetters(['isLoggedIn',])
+      ...mapGetters(['isLoggedIn',]),
+      galleryIsActive() {
+        return (this.$route.path == '/')
+      },
+      uploadIsActive() {
+        return (this.$route.path == '/upload')
+      }
     },
     methods: {
       ...mapActions(['login', 'logout']), // you don't have to specify the auth module
@@ -46,5 +52,4 @@
     color: #a96666 !important
   .inline
     display: contents
-  
 </style>
