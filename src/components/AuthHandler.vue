@@ -1,6 +1,7 @@
 <template>
   <div>
     <h1>Please Wait</h1>
+    <router-link to="/">Go to Home</router-link>
   </div>
 </template>
 
@@ -10,9 +11,9 @@
   export default {
     name: 'AuthHandler',
     created() {
-      this.finalizeLogin('this is the token');
+      this.finalizeLogin(this.$route.fullPath);
     },
-    computed: {
+    methods: {
       ...mapActions(['finalizeLogin']),
     }
   }

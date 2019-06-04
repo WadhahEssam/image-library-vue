@@ -21,11 +21,11 @@ export default {
     login() {
       imgur.login();
     },
-    finalizeLogin({commit}, payload) {
-      console.log(payload);
+    finalizeLogin({commit}, link) {
+      commit('setToken', link.substring(30, 70));
     },
     logout({commit}) {
-      commit('setToken', null)
+      commit('setToken', null);
     }
   }
 };

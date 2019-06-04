@@ -5,7 +5,18 @@
         Image Storage
       </a>
       <div class="right menu">
-        <a href="#" @click="login" class="ui item">
+        <div v-if="isLoggedIn" class="inline">
+          <router-link to="/gallery"  class="ui item">
+            Gallery
+          </router-link>
+          <router-link to="/upload" class="ui item">
+            Upload
+          </router-link>
+          <a @click="logout" class="ui item reddish">
+            Logout
+          </a>
+        </div>
+        <a v-if="!isLoggedIn" @click="login" class="ui item">
           Login
         </a>
       </div>
@@ -14,12 +25,15 @@
 </template>
 
 <script>
-  import {mapActions} from 'vuex'; //helper function that will connect the store to this component
+  import {mapActions, mapGetters} from 'vuex'; //helper function that will connect the store to this component
 
   export default {
-    name: 'AppHeader',
+    name: 'AppHeader',    
+    computed: {
+      ...mapGetters(['isLoggedIn',])
+    },
     methods: {
-      ...mapActions(['login']), // you don't have to specify the auth module
+      ...mapActions(['login', 'logout']), // you don't have to specify the auth module
       // you can add other methods here
     }
     // or 
@@ -27,6 +41,10 @@
   }
 </script>
 
-<style>
-
+<style lang="sass">
+  .reddish
+    color: #a96666 !important
+  .inline
+    display: contents
+  
 </style>
