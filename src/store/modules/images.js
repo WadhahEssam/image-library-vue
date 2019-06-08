@@ -20,7 +20,7 @@ export default {
       const images = await api.fetchImages(rootState.auth.token); // getting the state of another modoule
       commit('setImages', images.data.data);
     }, 
-    async uploadImages({ commit, rootState }, images) {
+    async uploadImages({ rootState }, images) {
       await api.uploadImages(images, rootState.auth.token);
       router.push('/');
     }

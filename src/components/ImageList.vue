@@ -1,10 +1,16 @@
 <template>
   <div>
-    Image List
-    <div class="images" v-for="image in allImages">
-      <img v-bind:src="image.link" alt="">
+    <div v-if="isLoggedIn" class="images-container" >
+      <img 
+        class="image" 
+        v-for="image in allImages" 
+        :key="image.deleteHash" 
+        v-bind:src="image.link"
+      >
     </div>
-    {{ allImages.length }}
+    <div v-else>
+      <h2>You are not logged in</h2>
+    </div>
   </div>
 </template>
 
@@ -23,12 +29,18 @@
     },
     computed: {
       ...mapGetters([
-        'allImages',
+        'allImages', 'isLoggedIn',
       ])
     },
   }
 </script>
 
-<style lang="scss" scoped>
+<style lang="sass" scoped>
+.images-container
+  column-count: 3
+  column-gap: 0
 
+.image
+  max-width: 100%
+  padding: 5px
 </style>
