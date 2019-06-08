@@ -19,6 +19,9 @@ export default {
       const images = await api.fetchImages(rootState.auth.token); // getting the state of another modoule
       commit('setImages', images.data.data);
     }, 
+    async uploadImages({ commit }, images) {
+      console.log(images); 
+    }
   }
 };
 

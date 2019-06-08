@@ -1,13 +1,25 @@
 <template>
   <div class="dropper">
-    <input type="file"/>
+    <input 
+      @change="uploadImages($event.target.files)" 
+      type="file"
+      multiple
+      accept="image/*"
+    />
     <span>Drag files here!</span>
   </div>
 </template>
 
 <script>
+  import { mapActions } from 'vuex'
+
   export default {
-    name: 'UploadForm'
+    name: 'UploadForm',
+    methods: {
+      ...mapActions([
+        'uploadImages', //also supports payload `this.nameOfAction(amount)` 
+      ])
+    },
   }
 </script>
 
