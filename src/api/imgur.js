@@ -17,6 +17,22 @@ export default {
       headers: {
         Authorization: `Bearer ${token}`
       }
-    })
+    });
+  },
+  uploadImages(images, token) {
+    // upload images can happen one at a time
+    // because the images is an ( Object like array ) 
+    // so you should convert it to an actual array 
+    // before working with it
+    const promises = Array.from(images).map((image) => {
+      const formData = new FormData();
+      formData.append('image', image);
+      return axios.post(`${ROOT_URL}3/image`, formData, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+    });
+    return Promise.all(promises);
   }
 };
